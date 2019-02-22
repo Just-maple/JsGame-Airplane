@@ -1,6 +1,6 @@
 # airplane
 
-> A Vue.js project
+> 基于Vue和Dom渲染元素的打飞机游戏
 
 ## Build Setup
 
