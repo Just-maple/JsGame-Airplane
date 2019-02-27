@@ -3,8 +3,9 @@
     style="background: #74c4fd;user-focus: none;user-select: none;"
     :style="`width: ${playGround.x}px;height: ${playGround.y}px;border: 1px solid`"
     @mousemove="follow"
-
-    @touchmove.stop="touch" @click.stop="e=>{e.preventDefault()}">
+    @touchmove.stop="touch"
+    @click.stop="e=>{e.preventDefault()}"
+  >
     <div v-if="start"
          style="pointer-events: none"
     >
