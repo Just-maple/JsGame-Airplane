@@ -1,9 +1,10 @@
 <template>
   <div
-    style="background: #74c4fd;user-focus: none;user-select: none;"
+    style="background: #74c4fd;user-focus: none;user-select: none;touch-action: none"
     :style="`width: ${playGround.x}px;height: ${playGround.y}px;border: 1px solid`"
     @mousemove="follow"
     @touchmove.stop="touch"
+    @touchstart.stop="touch"
     @click.stop="e=>{e.preventDefault()}"
   >
     <div v-if="start"
@@ -43,7 +44,7 @@
       <img src="/static/media/airplane.png" height="100" style="margin-top:10%">
       <div
         style="margin:0 20%;margin-top:10%;padding: 40px;;border-radius: 20px;background: rgba(255,255,255,0.8);font-size: 200%;"
-        @click="startGame">
+        @click.stop="startGame">
         开始游戏
       </div>
     </div>
@@ -293,7 +294,7 @@
         let select = size_arr[Math.floor(Math.random() * size_arr.length)];
         let base = 50;
         let s = new airplane.object(x, y, Math.sqrt(select) * base, Math.sqrt(select) * base);
-        s.speedY = Math.random() * (10 + this.playGround.score / 2000) + Math.sqrt(this.playGround.score) / 10;
+        s.speedY = Math.random() * (10 + this.playGround.score / 1000) + Math.sqrt(this.playGround.score) / 5;
         s.speedY /= select
         if (this.game_args.chasing_mode || select > 1) {
           s.speedX = -(x - this.airplane.x) / (this.airplane.y - y) * s.speedY
@@ -365,8 +366,11 @@
       },
 
       touch(e) {
-        this.checkPosition(e.targetTouches[0].clientX, e.targetTouches[0].clientY - 50)
-        e.preventDefault()
+        if(this.start){
+          this.checkPosition(e.targetTouches[0].clientX, e.targetTouches[0].clientY - 50)
+          e.preventDefault()
+          return false
+        }
       },
       follow(event) {
         this.checkPosition(event.clientX, event.clientY)
