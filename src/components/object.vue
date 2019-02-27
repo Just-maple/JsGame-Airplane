@@ -58,22 +58,22 @@
         },
         i: '',
         move_i: '',
-        fpt: 50
+        fps: 50
       }
     },
     created() {
       this.move_i = setInterval(() => {
         this.object.y += this.object.speedY
         this.object.x += this.object.speedX
-      }, 1000 / this.fpt)
+      }, 1000 / this.fps)
       if (this.object.type === 2) {
-        this.i = setInterval(this.enemyMove, 1000 / this.fpt)
+        this.i = setInterval(this.enemyMove, 1000 / this.fps)
       } else if (this.object.type === 3) {
-        this.i = setInterval(this.bulletMove, 1000 / this.fpt)
+        this.i = setInterval(this.bulletMove, 1000 / this.fps)
       } else if (this.object.type === 0) {
-        this.i = setInterval(this.cloudMove, 1000 / this.fpt)
+        this.i = setInterval(this.cloudMove, 1000 / this.fps)
       } else if (this.object.type === 6) {
-        this.i = setInterval(this.toolMove, 1000 / this.fpt)
+        this.i = setInterval(this.toolMove, 1000 / this.fps)
       }
     },
     destroyed() {
