@@ -9,7 +9,7 @@
          style="pointer-events: none"
     >
       <div style="float: right;margin: 10px"> 最高分：{{playGround.highest_score}} 得分：{{playGround.score}}</div>
-      <object-dom :airplane="airplane"></object-dom>
+      <object-dom :object="airplane"></object-dom>
       <object-dom
         :playGround="playGround"
         @crash="crash()"
@@ -17,7 +17,7 @@
         @atk="shootEnemy"
         :player="airplane"
         :enemies="enemies"
-        :airplane="enemy"
+        :object="enemy"
         v-if="isValidObj(enemy)"
         v-for="enemy,i in enemies"
         :key="enemy.id">
@@ -240,9 +240,9 @@
         })
         setTimeout(this.gc, this.game_args.gc_f)
       },
-      isValidObj(enemy) {
+      isValidObj(obj) {
         let playGround = this.playGround
-        return enemy.type !== 5 && enemy.y < playGround.y && enemy.y >= 0 && enemy.x >= 0 && enemy.x < playGround.x
+        return obj.type !== 5 && obj.y < playGround.y && obj.y >= 0 && obj.x >= 0 && obj.x < playGround.x
       },
       shoot() {
         if (this.airplane.type !== 1) {
@@ -292,7 +292,7 @@
         let select = size_arr[Math.floor(Math.random() * size_arr.length)];
         let base = 50;
         let s = new airplane.object(x, y, Math.sqrt(select) * base, Math.sqrt(select) * base);
-        s.speedY = Math.random() * (10 + Math.sqrt(this.playGround.score) / 100) + 5;
+        s.speedY = Math.random() * (10 + this.playGround.score / 2000) + Math.sqrt(this.playGround.score) / 10;
         s.speedY /= select
         if (this.game_args.chasing_mode || select > 1) {
           s.speedX = -(x - this.airplane.x) / (this.airplane.y - y) * s.speedY

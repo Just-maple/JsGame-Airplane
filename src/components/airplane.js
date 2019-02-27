@@ -13,7 +13,6 @@ class object {
 }
 
 function objectCollision(objectA, objectB) {
-
   let ARight = objectA.x + objectA.width / 2;
   let BRight = objectB.x + objectB.width / 2;
   let ALeft = objectA.x - objectA.width / 2;
@@ -25,7 +24,6 @@ function objectCollision(objectA, objectB) {
   let XCollision = (ARight > BLeft && ALeft <= BRight || BRight > ALeft && BLeft <= ALeft);
   let YCollision = (ATop > BBottom && ABottom <= BTop || BTop > ABottom && BBottom <= ATop);
   return XCollision && YCollision
-
 }
 
 export default {
